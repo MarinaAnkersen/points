@@ -17,8 +17,8 @@ class Team(Resource):
     parser.add_argument('make_from_playoffs',type=int)
     parser.add_argument('promoted',type=int)
     parser.add_argument('win_championship',type=int)
-    
-    @jwt_required
+
+    # @jwt_required
     def get(self, team_name):
         team = TeamModel.find_by_name(team_name)
         if team:
@@ -41,15 +41,15 @@ class Team(Resource):
 
 
 class TeamList(Resource):
-    @jwt_optional
+    # @jwt_optional
     def get(self):
-        user_id = get_jwt_identity()
+        # user_id = get_jwt_identity()
         teams = [team.json() for team in TeamModel.find_all()]
-        if user_id:
-            return {'teams': teams}, 200
-        return {'teams': [team['team_name'] for team in teams],
-        'message': 'More data available if you log in'}, 200
-
+        # if user_id:
+        #     return {'teams': teams}, 200
+        # return {'teams': [team['team_name'] for team in teams],
+        # 'message': 'More data available if you log in'}, 200
+        return {'teams': teams}
 
 
 
