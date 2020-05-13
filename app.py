@@ -3,7 +3,8 @@ from flask import Flask, jsonify
 from flask_restful import Api
 from flask_jwt_extended import JWTManager
 from resources.user import UserRegister, User, UserLogIn, TokenRefresh, UserLogOut
-from resources.team import Team,TeamList
+from resources.command import Command,CommandList
+from resources.match import Match,MatchList
 from blacklist import BLACKLIST
 from db import db
 from flask_cors import CORS
@@ -69,8 +70,10 @@ def revoked_token_callback():
      }), 401
 
 
-api.add_resource(Team, '/team/<string:team_name>')
-api.add_resource(TeamList, '/teams')
+api.add_resource(Command, '/command/<string:command_name>')
+api.add_resource(CommandList, '/commands')
+api.add_resource(Match, '/match/<string:squad_name>')
+api.add_resource(MatchList, '/matches')
 api.add_resource(UserRegister, '/register')
 api.add_resource(User, '/user/<int:user_id>')
 api.add_resource(UserLogIn, '/login')

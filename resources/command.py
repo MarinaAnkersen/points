@@ -3,10 +3,10 @@ from flask_jwt_extended import (
 jwt_required,
 jwt_optional,
 get_jwt_identity)
-from models.team import TeamModel
+from models.command import CommandModel
 
 
-class Team(Resource):
+class Command(Resource):
     parser = reqparse.RequestParser()
     parser.add_argument('spi',type=float)
     parser.add_argument('off',type=float)
@@ -19,37 +19,37 @@ class Team(Resource):
     parser.add_argument('win_championship',type=int)
 
     # @jwt_required
-    def get(self, team_name):
-        team = TeamModel.find_by_name(team_name)
-        if team:
-            return team.json()
+    def get(self, command_name):
+        command = CommandModel.find_by_name(command_name)
+        if command:
+            return command.json()
         return {'message': 'It doesnt exist '}, 404
 
 
-    def post(self, team_name):
-        if TeamModel.find_by_name(team_name):
-            return {'message': "a team '{}' already exists".format(team_name)}, 400
-        data = Team.parser.parse_args()
-        team = TeamModel(team_name, **data)
+    def post(self, command_name):
+        if CommandModel.find_by_name(command_name):
+            return {'message': "a command '{}' already exists".format(command_name)}, 400
+        data = Command.parser.parse_args()
+        command = CommandModel(command_name, **data)
 
         try:
-            team.save_to_db()
+            command.save_to_db()
         except:
             return {"message": "An error has occured"}, 500 #internale server error
 
-        return team.json(), 201
+        return command.json(), 201
 
 
-class TeamList(Resource):
+class CommandList(Resource):
     # @jwt_optional
     def get(self):
         # user_id = get_jwt_identity()
-        teams = [team.json() for team in TeamModel.find_all()]
+        commands = [command.json() for command in CommandModel.find_all()]
         # if user_id:
-        #     return {'teams': teams}, 200
-        # return {'teams': [team['team_name'] for team in teams],
+        #     return {'commands': commands}, 200
+        # return {'commands': [command['command_name'] for command in commands],
         # 'message': 'More data available if you log in'}, 200
-        return {'teams': teams}
+        return {'commands': commands}
 
 
 

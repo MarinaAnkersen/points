@@ -1,11 +1,10 @@
-
 from db import db
 
-class TeamModel(db.Model):
+class CommandModel(db.Model):
     __tablename__ = 'championship'
 
     id = db.Column(db.Integer, primary_key=True)
-    team_name = db.Column(db.String(80))
+    command_name = db.Column(db.String(80))
     spi = db.Column(db.Float(precision=1))
     off = db.Column(db.Float(precision=1))
     defi = db.Column(db.Float(precision=1))
@@ -16,10 +15,10 @@ class TeamModel(db.Model):
     promoted = db.Column(db.Integer)
     win_championship = db.Column(db.Integer)
 
-    def __init__(self, team_name, spi=None, off=None, defi=None,
+    def __init__(self, command_name, spi=None, off=None, defi=None,
     goal_dif=None,pts=None,relegated=None,make_from_playoffs=None,
     promoted=None,win_championship=None):
-        self.team_name = team_name
+        self.command_name = command_name
         self.spi = spi
         self.off = off
         self.defi = defi
@@ -32,7 +31,7 @@ class TeamModel(db.Model):
 
     def json(self):
         return {'id': self.id,
-        'team_name': self.team_name,
+        'command_name': self.command_name,
         'spi': self.spi,
         'off': self.off,
         'defi': self.defi,
@@ -49,8 +48,8 @@ class TeamModel(db.Model):
         return cls.query.all()
 
     @classmethod
-    def find_by_name(cls, team_name):
-        return cls.query.filter_by(team_name=team_name).first()
+    def find_by_name(cls, command_name):
+        return cls.query.filter_by(command_name=command_name).first()
 
     def save_to_db(self):
         db.session.add(self)
@@ -59,5 +58,3 @@ class TeamModel(db.Model):
     def delete_from_db(self):
         db.session.delete(self)
         db.session.commit()
-
-# self.team_name = team_name
