@@ -6,8 +6,10 @@ from resources.user import UserRegister, User, UserLogIn, TokenRefresh, UserLogO
 from resources.team import Team,TeamList
 from blacklist import BLACKLIST
 from db import db
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL','sqlite:///data.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['PROPAGATE_EXCEPTIONS']=True
@@ -74,6 +76,7 @@ api.add_resource(User, '/user/<int:user_id>')
 api.add_resource(UserLogIn, '/login')
 api.add_resource(TokenRefresh, '/refresh')
 api.add_resource(UserLogOut, '/logout')
+
 
 if __name__ == '__main__':
     db.init_app(app)
