@@ -44,7 +44,7 @@ class MatchModel(db.Model):
 
     @classmethod
     def find_by_squad_name(cls, squad_name):
-        return cls.query.filter(or_(squad_name=first_squad_name,squad_name=second_squad_name))
+        return cls.query.filter(or_(first_squad_name=squad_name,second_squad_name=squad_name))
 
     def save_to_db(self):
         db.session.add(self)
