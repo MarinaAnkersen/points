@@ -28,7 +28,7 @@ class MatchModel(db.Model):
 
     def json(self):
         return {'id': self.id,
-        'match_date': self.match_date,
+        'match_date': str(self.match_date),
         'round_name': self.round_name,
         'first_squad_name': self.first_squad_name,
         'first_squad_points': self.first_squad_points,
