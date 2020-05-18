@@ -1,4 +1,5 @@
 from db import db
+from sqlalchemy import or_
 
 
 class MatchModel(db.Model):
