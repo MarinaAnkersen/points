@@ -8,8 +8,8 @@ jwt_refresh_token_required,
 get_jwt_identity,
 jwt_required,
 get_raw_jwt)
-from models.user import UserModel
-from blacklist import BLACKLIST
+from project.models.user import UserModel
+from project.blacklist import BLACKLIST
 
 _user_parser = reqparse.RequestParser()
 _user_parser.add_argument('username',

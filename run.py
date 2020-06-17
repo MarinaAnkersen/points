@@ -1,5 +1,5 @@
-from app import app
-from db import db
+from expected_goals_rest.app import app
+from expected_goals_rest.db import db
 
 db.init_app(app)
 

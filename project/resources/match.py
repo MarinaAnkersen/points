@@ -3,7 +3,7 @@ from flask_jwt_extended import (
 jwt_required,
 jwt_optional,
 get_jwt_identity)
-from models.match import MatchModel
+from project.models.match import MatchModel
 
 
 class Match(Resource):

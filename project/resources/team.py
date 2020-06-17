@@ -3,10 +3,10 @@ from flask_jwt_extended import (
 jwt_required,
 jwt_optional,
 get_jwt_identity)
-from models.command import CommandModel
+from project.models.team import TeamModel
 
 
-class Command(Resource):
+class Team(Resource):
     parser = reqparse.RequestParser()
     parser.add_argument('spi',type=float)
     parser.add_argument('off',type=float)
@@ -19,38 +19,41 @@ class Command(Resource):
     parser.add_argument('win_championship',type=int)
 
     # @jwt_required
-    def get(self, command_name):
-        command = CommandModel.find_by_name(command_name)
-        if command:
-            return command.json()
+    def get(self, team_name):
+        team = TeamModel.find_by_name(team_name)
+        if team:
+            return team.json()
         return {'message': 'It doesnt exist '}, 404
 
 
-    def post(self, command_name):
-        if CommandModel.find_by_name(command_name):
-            return {'message': "a command '{}' already exists".format(command_name)}, 400
-        data = Command.parser.parse_args()
-        command = CommandModel(command_name, **data)
+    def post(self, team_name):
+        if TeamModel.find_by_name(team_name):
+            return {'message': "a team '{}' already exists".format(team_name)}, 400
+        data = Team.parser.parse_args()
+        team = TeamModel(team_name, **data)
 
         try:
-            command.save_to_db()
+            team.save_to_db()
         except:
             return {"message": "An error has occured"}, 500 #internale server error
 
-        return command.json(), 201
+        return team.json(), 201
 
 
-class CommandList(Resource):
+class TeamList(Resource):
     # @jwt_optional
     def get(self):
         # user_id = get_jwt_identity()
-        commands = [command.json() for command in CommandModel.find_all()]
+        teams = [team.json() for team in TeamModel.find_all()]
         # if user_id:
-        #     return {'commands': commands}, 200
-        # return {'commands': [command['command_name'] for command in commands],
+        #     return {'teams': teams}, 200
+        # return {'teams': [team['team_name'] for team in teams],
         # 'message': 'More data available if you log in'}, 200
-        return {'commands': commands}
-
+        return {'teams': teams}
+        # return {
+        #     'status': 'success',
+        #     'message': 'pong!'
+        # }
 
 
         # {"items": list(map(lambda x: x.json(), ItemModel.query.all()))}
