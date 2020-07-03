@@ -1,6 +1,7 @@
 import pytest
-from project.models.team import TeamModel
+
 from project import db
+from project.models.team import TeamModel
 
 
 @pytest.fixture

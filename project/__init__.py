@@ -25,11 +25,8 @@ def create_app(script_info=None):
     CORS(app)
 
     # set config
-    # app_settings = os.getenv('APP_SETTINGS')
-    # app.config.from_object(DevelopmentConfig)
-
-
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('postgresql://postgres:postgres@goals-db:5432/goals_dev')
+    app_settings = os.getenv('APP_SETTINGS')
+    app.config.from_object(app_settings)
 
     # set up extensions
     db.init_app(app)
@@ -37,6 +34,8 @@ def create_app(script_info=None):
     # register blueprints
     from project.api.team import teams_blueprint
     app.register_blueprint(teams_blueprint)
+    from project.api.match import matches_blueprint
+    app.register_blueprint(matches_blueprint)
 
     # shell context for flask cli
     @app.shell_context_processor

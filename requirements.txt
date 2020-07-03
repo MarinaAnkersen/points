@@ -5,3 +5,5 @@ Flask-SQLAlchemy
 Flask-cors
 pytest
 psycopg2-binary
+werkzeug==0.16.1
+gunicorn==20.0.4

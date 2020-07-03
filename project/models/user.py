@@ -26,9 +26,11 @@ class UserModel(db.Model):
         db.session.delete(self)
         db.session.commit()
 
+
     @classmethod
     def find_by_username(cls, username):
         return cls.query.filter_by(username=username).first()
+
 
     @classmethod
     def find_by_id(cls, _id):

@@ -1,5 +1,6 @@
 from flask import Blueprint
 from flask_restful import Api
+
 from project.resources.team import Team,TeamList
 
 

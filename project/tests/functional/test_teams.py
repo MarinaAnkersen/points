@@ -1,10 +1,21 @@
 import pytest
+import json
+
 from project.tests.fixtures.teams_data import teams_data
 
 
-@pytest.mark.usefixtures('teams_data')
-def test_empty_db(test_app):
+def test_empty_teams_db(test_app):
     """Start with a blank database and get teams."""
+    client = test_app.test_client()
+    response = client.get('/teams')
+
+    assert response.status_code == 200
+    assert response.headers['Content-Type'] == "application/json"
+
+
+@pytest.mark.usefixtures('teams_data')
+def test_get_teams(test_app):
+    """Get teams."""
     client = test_app.test_client()
     response = client.get('/teams')
 
@@ -22,3 +33,38 @@ def test_empty_db(test_app):
     assert response.json['teams'] ==  [{'id': 1, 'team_name': 'test',
     'spi': 17.5, 'off': 1.2, 'defi': 4.1, 'goal_dif': 1, 'pts':2,'relegated':1,
     'make_from_playoffs':2,'promoted':0,'win_championship':1}]
+
+
+def test_get_one_team(test_app):
+    """Get one team by team name."""
+    client = test_app.test_client()
+    response = client.get('/team/test')
+
+    assert response.status_code == 200
+    assert response.headers['Content-Type'] == "application/json"
+    assert response.json ==  {'id': 1, 'team_name': 'test',
+    'spi': 17.5, 'off': 1.2, 'defi': 4.1, 'goal_dif': 1, 'pts':2,'relegated':1,
+    'make_from_playoffs':2,'promoted':0,'win_championship':1}
+
+
+def test_get_non_existing_team(test_app):
+    """Try to get not existing team by team name."""
+    client = test_app.test_client()
+    response = client.get('/team/non_existing')
+
+    assert response.status_code == 404
+    assert response.headers['Content-Type'] == "application/json"
+    assert response.json['message'] == 'Oops we dont have data on this team'
+
+
+# def test_add_user(test_app):
+#     client = test_app.test_client()
+#     resp = client.post(
+#         '/team',
+#         data=json.dumps({
+#             'team_name': 'marina'
+#         }),
+#         content_type='application/json',
+#     )
+#     data = json.loads(resp.data.decode())
+#     assert resp.status_code == 201

@@ -48,6 +48,7 @@ class TeamModel(db.Model):
     def find_all(cls):
         return cls.query.all()
 
+
     @classmethod
     def find_by_name(cls, team_name):
         return cls.query.filter_by(team_name=team_name).first()
