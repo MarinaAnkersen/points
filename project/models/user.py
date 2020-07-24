@@ -1,4 +1,7 @@
+import os
+
 from sqlalchemy.sql import func
+from flask_admin.contrib.sqla import ModelView
 
 from project import db
 
@@ -49,3 +52,8 @@ class UserModel(db.Model):
     @classmethod
     def find_by_id(cls, _id):
         return cls.query.filter_by(id=_id).first()
+
+
+if os.getenv("FLASK_ENV") == "development":
+    from project import admin
+    admin.add_view(ModelView(UserModel, db.session))

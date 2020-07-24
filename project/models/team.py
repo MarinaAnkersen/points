@@ -1,4 +1,6 @@
+import os
 from project import db
+from flask_admin.contrib.sqla import ModelView 
 
 
 class TeamModel(db.Model):
@@ -49,3 +51,8 @@ class TeamModel(db.Model):
     def save_to_db(self):
         db.session.add(self)
         db.session.commit()
+
+
+if os.getenv("FLASK_ENV") == "development":
+    from project import admin
+    admin.add_view(ModelView(TeamModel, db.session))

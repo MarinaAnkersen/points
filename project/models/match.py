@@ -1,4 +1,7 @@
+import os
+
 from sqlalchemy import or_
+from flask_admin.contrib.sqla import ModelView
 
 from project import db
 
@@ -55,3 +58,8 @@ class MatchModel(db.Model):
             return cls.query.filter(or_(MatchModel.first_squad_name == squad_name,
                                         MatchModel.second_squad_name ==
                                         squad_name)).all()
+
+
+if os.getenv("FLASK_ENV") == "development":
+    from project import admin
+    admin.add_view(ModelView(MatchModel, db.session))
