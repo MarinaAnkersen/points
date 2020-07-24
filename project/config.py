@@ -5,6 +5,7 @@ class BaseConfig:
     TESTING = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     PROPAGATE_EXCEPTIONS = True
+    # will be removed in continous integration tool
     SECRET_KEY = 'marina'
 
 
