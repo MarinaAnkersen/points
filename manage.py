@@ -6,6 +6,7 @@ from project import create_app
 from project import db
 from project.models.team import TeamModel
 from project.models.match import MatchModel
+from project.models.user import UserModel
 
 
 app = create_app()
@@ -40,6 +41,10 @@ def seed_db():
     first_squad_name='Manchester City', first_squad_score=0,
     first_squad_points=0,second_squad_name='Burnley',second_squad_score=5,
     second_squad_points=2)])
+    db.session.commit()
+    db.session.add(UserModel(username='test', password='test',
+                             email='test@com', active=True,
+                             created_datetime='2020-05-16 13:51:18.468379'))
     db.session.commit()
 
 if __name__ == '__main__':
