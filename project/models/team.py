@@ -55,6 +55,6 @@ class TeamModel(db.Model):
         db.session.commit()
 
 
-if os.getenv("FLASK_ENV") == "development":
+if os.getenv('FLASK_ENV') == 'development':
     from project import admin
     admin.add_view(ModelView(TeamModel, db.session))

@@ -54,6 +54,6 @@ class UserModel(db.Model):
         return cls.query.filter_by(id=_id).first()
 
 
-if os.getenv("FLASK_ENV") == "development":
+if os.getenv('FLASK_ENV') == 'development':
     from project import admin
     admin.add_view(ModelView(UserModel, db.session))

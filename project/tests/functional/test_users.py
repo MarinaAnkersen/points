@@ -83,8 +83,8 @@ def test_get_one_user(test_app):
 
 
 @pytest.mark.parametrize('user_id, status_code, message', [
-    [3, 200, 'User deleted.'],
-    [4, 404, 'User not found.']
+    [3, 200, "User '3' deleted."],
+    [4, 404, "User '4' not found."]
 ])
 def test_delete_user(test_app, user_id, status_code, message):
     """Delete one user by id."""
@@ -103,7 +103,7 @@ def test_get_non_existing_user(test_app):
 
     assert response.status_code == 404
     assert response.headers['Content-Type'] == "application/json"
-    assert response.json['message'] == 'User not found.'
+    assert response.json['message'] == "User '10' not found."
 
 
 @pytest.mark.parametrize('payload, content_type, status_code, message', [

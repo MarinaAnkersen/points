@@ -60,6 +60,6 @@ class MatchModel(db.Model):
                                         squad_name)).all()
 
 
-if os.getenv("FLASK_ENV") == "development":
+if os.getenv('FLASK_ENV') == 'development':
     from project import admin
     admin.add_view(ModelView(MatchModel, db.session))
