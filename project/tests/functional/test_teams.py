@@ -40,7 +40,7 @@ def test_get_teams(test_app):
 def test_get_one_team(test_app):
     """Get one team by team name."""
     client = test_app.test_client()
-    response = client.get('/team/test')
+    response = client.get('/teams/test')
 
     assert response.status_code == 200
     assert response.headers['Content-Type'] == "application/json"
@@ -53,7 +53,7 @@ def test_get_one_team(test_app):
 def test_get_non_existing_team(test_app):
     """Try to get not existing team by team name."""
     client = test_app.test_client()
-    response = client.get('/team/non_existing')
+    response = client.get('/teams/non_existing')
 
     assert response.status_code == 404
     assert response.headers['Content-Type'] == "application/json"
@@ -64,7 +64,7 @@ def test_post_existing_team(test_app):
     """Post existing team by team name."""
     client = test_app.test_client()
     response = client.post(
-            '/team/test')
+            '/teams/test')
     assert response.status_code == 400
     assert response.headers['Content-Type'] == "application/json"
     assert response.json['message'] == "a team 'test' already exists"
@@ -74,7 +74,7 @@ def test_post_non_existing_team(test_app):
     """Post non existing team by team name."""
     client = test_app.test_client()
     response = client.post(
-            '/team/test1',
+            '/teams/test1',
             data=json.dumps({
                 'team_name': 'test1',
                 'spi': 0,

@@ -1,10 +1,7 @@
-from flask import Blueprint
-from flask_restful import Api
+from flask_restx import Namespace
 
 from project.resources.user import UserRegister
 
-user_register_blueprint = Blueprint('register', __name__)
-api = Api(user_register_blueprint)
+user_register_namespace = Namespace('register')
 
-
-api.add_resource(UserRegister, '/register')
+user_register_namespace.add_resource(UserRegister, '')

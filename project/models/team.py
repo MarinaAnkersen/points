@@ -1,6 +1,8 @@
 import os
+
+from flask_admin.contrib.sqla import ModelView
+
 from project import db
-from flask_admin.contrib.sqla import ModelView 
 
 
 class TeamModel(db.Model):

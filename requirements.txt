@@ -1,4 +1,4 @@
-Flask-RESTful
+Flask-RESTX==0.1.1
 Flask-JWT-Extended
 Flask-cors
 Flask-SQLAlchemy==2.4.1

@@ -1,11 +1,8 @@
-from flask import Blueprint
-from flask_restful import Api
+from flask_restx import Namespace
 
 from project.resources.team import Team, TeamList
 
-teams_blueprint = Blueprint('teams', __name__)
-api = Api(teams_blueprint)
+teams_namespace = Namespace('teams')
 
-
-api.add_resource(Team, '/team/<string:team_name>')
-api.add_resource(TeamList, '/teams')
+teams_namespace.add_resource(TeamList, '')
+teams_namespace.add_resource(Team, '/<string:team_name>')

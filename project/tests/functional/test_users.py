@@ -115,10 +115,10 @@ def test_get_non_existing_user(test_app):
                           'User with this email is already exists.'],
                          [{'username': 'test@com', 'password': 'test'},
                           'application/json', 400,
-                          {'email': 'This field cant be left blank'}],
+                          'Input payload validation failed'],
                          [{'email': 'test@com', 'password': 'test'},
                           'application/json', 400,
-                          {'username': 'This field cant be left blank'}]])
+                          'Input payload validation failed']])
 def test_invalid_input(test_app, payload, content_type, status_code, message):
     client = test_app.test_client()
     response = client.post(

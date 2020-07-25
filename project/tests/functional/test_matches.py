@@ -17,7 +17,7 @@ def test_empty_matches_db(test_app):
 def test_single_match_db(test_app):
     """Start with a single match in the database and get this match."""
     client = test_app.test_client()
-    response = client.get('/match/Liverpool')
+    response = client.get('/matches/Liverpool')
 
     assert response.status_code == 200
     assert response.headers['Content-Type'] == "application/json"
@@ -56,7 +56,7 @@ def test_get_matches(test_app):
 def test_get_one_match(test_app):
     """Get one team by match name."""
     client = test_app.test_client()
-    response = client.get('/match/Burnley')
+    response = client.get('/matches/Burnley')
 
     assert response.status_code == 200
     assert response.headers['Content-Type'] == "application/json"
@@ -74,7 +74,7 @@ def test_get_one_match(test_app):
 def test_get_one_team_multiple_matches(test_app):
     """Get one team by match name that has multiple games."""
     client = test_app.test_client()
-    response = client.get('/match/Liverpool')
+    response = client.get('/matches/Liverpool')
 
     assert response.status_code == 200
     assert response.headers['Content-Type'] == "application/json"
@@ -101,7 +101,7 @@ def test_get_one_team_multiple_matches(test_app):
 def test_get_non_existing_match(test_app):
     """Try to get not existing team by squad name."""
     client = test_app.test_client()
-    response = client.get('/match/non_existing')
+    response = client.get('/matches/non_existing')
 
     assert response.status_code == 404
     assert response.headers['Content-Type'] == "application/json"
@@ -111,7 +111,7 @@ def test_get_non_existing_match(test_app):
 def test_get_matches_by_complex_name(test_app):
     """Get matches by quering squad name with dash."""
     client = test_app.test_client()
-    response = client.get('/match/Manchester-City')
+    response = client.get('/matches/Manchester-City')
 
     assert response.status_code == 200
     assert response.headers['Content-Type'] == "application/json"

@@ -1,7 +1,7 @@
 import os
 
-from sqlalchemy import or_
 from flask_admin.contrib.sqla import ModelView
+from sqlalchemy import or_
 
 from project import db
 

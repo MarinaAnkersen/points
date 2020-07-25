@@ -1,11 +1,8 @@
-from flask import Blueprint
-from flask_restful import Api
+from flask_restx import Namespace
 
 from project.resources.match import Match, MatchList
 
-matches_blueprint = Blueprint('matches', __name__)
-api = Api(matches_blueprint)
+matches_namespace = Namespace('matches')
 
-
-api.add_resource(Match, '/match/<string:squad_name>')
-api.add_resource(MatchList, '/matches')
+matches_namespace.add_resource(MatchList, '')
+matches_namespace.add_resource(Match, '/<string:squad_name>')
