@@ -1,8 +1,8 @@
-# Expected goals REST API project
+# Expected points REST API project
 ## Description
 This project is implemented using Flask and is a REST API for expected and
-actual goals in Premier League current season. The application is
-containerised using Docker. There is no ETL yet and project using static
+actual points in Premier League current season. The application is
+containerised using Docker. There is no ETL yet and project is using static
 data files.
 ## Installation
 Start by ensuring that you have Docker:
@@ -24,8 +24,6 @@ docker-compose up -d
 Run the following commands to create database and seed it with initial data:
 ```
 docker-compose exec goals python3 manage.py recreate_db
-```
-```
 docker-compose exec goals python manage.py seed_db
 ```
 Try one of the endpoints out locally:
@@ -72,7 +70,7 @@ git push heroku master
 * Go to the Deploy tab in Heroku UI again and click Deploy Branch in
 Manual Deploy section
 * Run the following in your Terminal window in order to seed the database
-with the data:
+with some data:
 ```
 heroku run python manage.py recreate_db --app <your heroku app name>
 heroku run python manage.py seed_db --app <your heroku app name>
@@ -80,6 +78,6 @@ heroku run python manage.py seed_db --app <your heroku app name>
 * Open an app clicking the button in the right top corner
 ## Demo
 Heroku deployed app:
-https://vast-mountain-75503.herokuapp.com/matches
-https://vast-mountain-75503.herokuapp.com/teams
-https://vast-mountain-75503.herokuapp.com/users
+* https://vast-mountain-75503.herokuapp.com/matches
+* https://vast-mountain-75503.herokuapp.com/teams
+* https://vast-mountain-75503.herokuapp.com/users

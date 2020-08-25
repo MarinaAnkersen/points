@@ -5,4 +5,4 @@ from project.resources.match import Match, MatchList
 matches_namespace = Namespace('matches')
 
 matches_namespace.add_resource(MatchList, '')
-matches_namespace.add_resource(Match, '/<string:squad_name>')
+matches_namespace.add_resource(Match, '/match')

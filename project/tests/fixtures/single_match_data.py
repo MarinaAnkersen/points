@@ -7,7 +7,7 @@ from project.models.match import MatchModel
 @pytest.fixture
 def single_match_data():
     """Sample single match data."""
-    db.session.add_all([MatchModel(squad_id=1, match_date='2019-08-10',
+    db.session.add_all([MatchModel(match_id=1, match_date='2019-08-10',
                                    round_name='Week 1',
                                    first_squad_name='Liverpool',
                                    first_squad_score=0,
